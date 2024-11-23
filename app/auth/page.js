@@ -4,6 +4,7 @@ import { TextField,Button } from "@mui/material";
 import { FcGoogle } from "react-icons/fc";
 import { BsTwitterX } from "react-icons/bs";
 import { auth,signIn } from "@/auth";
+import { AuthEmail } from "./auth-email";
 
 export default async function Signin() {
     const session = await auth();
@@ -24,16 +25,7 @@ export default async function Signin() {
                     <p className="text-xs text-gray-600">Access your account as an existing user or create an account instantly as a new user</p>
                 </div>
                 <div className="w-full md:w-[289px] flex flex-col gap-2 rounded-b-md bg-gray-100 px-4 py-4">
-                    <form>
-                        <div className="mb-2">
-                            <TextField
-                            id="email"
-                            label="email"
-                            variant="outlined"
-                            className="w-full"/>
-                        </div>
-                        <Button type="submit" variant="contained" className="w-full">Continue</Button>
-                    </form>
+                    <AuthEmail/>
 
                     <div className="separator"> <span className="text-gray-400">OR</span> </div>
 
@@ -42,21 +34,21 @@ export default async function Signin() {
                             "use server"
                             await signIn("google")
                         }}>
-                            <button type="submit" className="w-full flex justify-center items-center gap-3 rounded-md bg-white hover:bg-yellow-300 p-3">
+                            <button type="submit" className="w-full flex justify-center items-center gap-3 rounded-md bg-white hover:bg-lime-300 p-3">
                                 <FcGoogle className="text-xl"/>
                                 <span className="text-gray-700">Google</span>
                             </button>
                         </form>
 
                         <form>
-                            <button className="w-full flex justify-center items-center gap-3 rounded-md bg-white hover:bg-sky-300 p-3">
+                            <button className="w-full flex justify-center items-center gap-3 rounded-md bg-white hover:bg-lime-300 p-3">
                                 <BsTwitterX className="text-xl"/>
                                 <span className="text-gray-700">Twitter</span>
                             </button>
                         </form>
                     </div>
 
-                    <p className="text-xs text-gray-500">By signing in you confirm to have read and agree with our <Link href="#" className="text-orange-500">Terms of Use</Link> and <Link href="#" className="text-orange-500">Privacy Policy</Link></p>
+                    <p className="text-xs text-gray-500">By signing in you confirm to have read and agree with our <Link href="#" className="text-green-500">Terms of Use</Link> and <Link href="#" className="text-green-500">Privacy Policy</Link></p>
                 </div>
             </article>
         </main>
