@@ -13,7 +13,7 @@ const rules = yup.object().shape({
     state:yup.string().notOneOf(["none"]),
     lga:yup.string().notOneOf(["none"]),
     business_description:yup.string().required().min(20),
-    website: string().url().nullable(),
+    website: yup.string().url().nullable(),
 });
 
 export default function Page () {
