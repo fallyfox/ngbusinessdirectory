@@ -59,7 +59,7 @@ export function AuthEmail() {
             </div>
             : null }
 
-            <Button type="submit" variant="contained" className="w-full bg-lime-600">Continue</Button>
+            <Button type="submit" variant="contained" style={{backgroundColor:"limegreen"}} className="w-full">Continue</Button>
         </form>
     )
 }
