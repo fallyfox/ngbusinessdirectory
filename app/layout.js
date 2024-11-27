@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
           <Nav/>
           {children}
           <Footer />
-          </SessionProvider>
+        </SessionProvider>
       </body>
     </html>
   );

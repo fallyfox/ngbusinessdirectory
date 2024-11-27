@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Bebas_Neue } from "next/font/google";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { GoDash } from "react-icons/go";
+import { useSession } from "next-auth/react";
 
 const bebasNeue = Bebas_Neue({
     subsets:["latin"],
@@ -12,6 +13,7 @@ const bebasNeue = Bebas_Neue({
 
 export function Nav () {
     const [menuClicked,setMenuClicked] = useState(false);
+    const {data:session} = useSession();
 
     return (
         <>
@@ -27,7 +29,11 @@ export function Nav () {
             </ul>
             <ul className="flex flex-row items-center gap-4">
                 <li>
-                    <Link href="#" className="text-md text-gray-800 border border-gray-400 py-2 px-3">Sign in</Link>
+                    { !session?.user ?
+                    <Link href="/auth" className="text-md text-gray-800 border border-gray-400 py-2 px-3">Sign in</Link>
+                    :
+                    <Link href="/add" className="text-md text-gray-800 border border-gray-400 py-2 px-3">Add Business</Link>
+                    }
                 </li>
                 <li>
                     {
