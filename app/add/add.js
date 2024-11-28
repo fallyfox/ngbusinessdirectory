@@ -106,6 +106,30 @@ export default function Add () {
                         </div>
                     </div>
 
+                    <div className="mb-3">
+                        <TextField
+                        multiline
+                        rows={3}
+                        type="text"
+                        id="business_description"
+                        label="business description"
+                        variant="outlined"
+                        className="w-full"
+                        onChange={handleChange}/>
+                        {touched.business_description && errors.business_description ? <span className="text-xs text-red-400">{errors.business_description}</span> : null}
+                    </div>
+
+                    <div className="mb-3">
+                        <TextField
+                        type="text"
+                        id="website"
+                        label="website"
+                        variant="outlined"
+                        className="w-full"
+                        onChange={handleChange}/>
+                        {touched.website && errors.website ? <span className="text-xs text-red-400">{errors.website}</span> : null}
+                    </div>
+
                     <button type="submit" className="bg-lime-700 text-white px-3 py-2 uppercase rounded-sm">Submit Business</button>
                 </form>
 
