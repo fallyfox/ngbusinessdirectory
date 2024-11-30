@@ -25,6 +25,8 @@ export function AuthEmail() {
                 } else {
                     alert("Check your email for a sign-in link!");
                 }
+                console.log(values)
+                
             } catch (error) {
                 console.error("Error during sign-in:", error);
             }
