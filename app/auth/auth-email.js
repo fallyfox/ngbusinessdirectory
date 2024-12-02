@@ -1,8 +1,10 @@
 "use client"
-// import { signIn } from "@/auth";
 import { TextField, Button } from "@mui/material"
 import { useFormik } from "formik";
+import { useSession } from "next-auth/react";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import * as yup from "yup";
 
 const schema = yup.object().shape({
@@ -15,24 +17,33 @@ const schema = yup.object().shape({
 })
 
 export function AuthEmail() {
+    const {data:session} = useSession()
+    const router = useRouter()
     const { handleSubmit, handleChange, values, errors, touched } = useFormik({
         initialValues: { email: "" },
         onSubmit: async (values) => {
             try {
-                const res = await signIn("email", { email: values.email, redirect: false });
+                const res = await signIn("nodemailer", { email: values.email, redirect: true });
                 if (res?.error) {
-                    alert("Authentication failed: " + res.error);
+                    alert("Authentication failed: check console");
+                    console.log(res?.error);
+                    
                 } else {
                     alert("Check your email for a sign-in link!");
                 }
-                console.log(values)
-                
+
             } catch (error) {
                 console.error("Error during sign-in:", error);
             }
         },
         validationSchema: schema
     });
+
+    useEffect(()=>{
+        if (session) {
+            router.push("/my/profile")
+        }
+    }, [])
 
     return (
         <form onSubmit={handleSubmit}>
