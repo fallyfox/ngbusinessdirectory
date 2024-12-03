@@ -1,10 +1,14 @@
 "use client"
 import { useState } from "react";
-import { TextField,Button,CircularProgress } from "@mui/material";
+import Link from "next/link";
+import { TextField,CircularProgress,Dialog,DialogContent,DialogActions } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { businessCategories } from "@/utils/business_categories";
 import { ngstates } from "@/utils/ng_states";
+import { IoIosCheckmarkCircle } from "react-icons/io";
+import { db } from "@/config/firebase.config";
+import { addDoc,collection } from "firebase/firestore";
 
 const rules = yup.object().shape({
     business_name:yup.string("business name must be a string").required("business name is mandatory").min(6,"business name must be at least 6 characters"),
@@ -16,18 +20,46 @@ const rules = yup.object().shape({
     website: yup.string().url().nullable(),
 });
 
-export default function Add () {
+export default function Add ({userID}) {
     const [startProgress,setStartProgress] = useState(false);
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => setOpen(true);
+    const handleClose = () =>  setOpen(false);
 
     const { handleSubmit,values,handleChange,touched,errors } = useFormik({
         initialValues: { business_name:"", category:"",sub_category:"",state:"",lga:"",business_description:"",website:""},
-        onSubmit: () => {
-            console.log(values)
+        onSubmit: async () => {
+            // Start loading indicator
+            setStartProgress(true);
+
+            // Send records to db
+            await addDoc(collection(db,"directories"),{
+                businessName:values.business_name,
+                category:values.category,
+                subCategory:values.sub_category,
+                state:values.state,
+                lga:values.lga,
+                description:values.business_description,
+                url:values.website,
+                createdBy:userID,
+                createdAt:new Date().getTime()
+            })
+            .then(() => {
+                setStartProgress(false); //stop loading indicator
+                handleClickOpen(); // Open success notification
+            })
+            .catch((e) => {
+                console.error(e);
+                setStartProgress(false); //stop loading indicator
+                alert("An error has occured"); //Open error message
+            })
         },
         validationSchema: rules
     });
 
     return (
+        <>
         <main className="flex justify-center px-2 md:px-8 lg:px-16 py-4 md:py-6 lg:py-8">
             <div className="w-full md:w-[620px] rounded-md bg-white shadow-md p-4">
                 <h1 className="text-2xl font-thin mb-6">Add a business</h1>
@@ -140,5 +172,25 @@ export default function Add () {
                 : null}
             </div>
         </main>
+        
+        <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        >
+            <DialogContent>
+                <p className="flex justify-center items-center gap-2 mb-4">
+                    <IoIosCheckmarkCircle className="text-xl text-green-500"/>
+                    <span className="text-green-600">Success</span>
+                </p>
+                <p className="text-gray-700">Your business have been successfully listed on NG Business Directory</p>
+            </DialogContent>
+            <DialogActions>
+                <Link href="/" className="h-8 flex justify-center items-center bg-lime-700 text-white rounded-sm px-2">Return to Home</Link>
+                <Link href="/my" className="h-8 flex justify-center items-center bg-lime-700 text-white rounded-sm px-2">Return to Dashboard</Link>
+            </DialogActions>
+        </Dialog>
+        </>
     )
 }

@@ -1,9 +1,14 @@
+import { auth } from "@/auth";
+import { Authorization } from "@/config/authorization.config";
+import My from "./my";
 
-export default function Page() {
-    
+export default async function Page() {
+    const session = await auth();
+
     return (
-        <main>
-            <p>my businesses</p>
-        </main>
+        <>
+        <Authorization/>
+        <My userId={session?.user?.id}/>
+        </>
     )
 }
