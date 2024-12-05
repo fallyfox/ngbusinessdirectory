@@ -28,7 +28,14 @@ export function MyListingCard ({listingDoc}) {
                 <li className="text-gray-700 text-md">{listingDoc?.data?.lga}, {listingDoc?.data?.state}</li>
             </ul>
 
-            <Link href="#" className="h-8 flex justify-center items-center bg-lime-700 text-white px-2 rounded-sm">View Listing</Link>
+            <div className="flex items-center gap-3">
+                <Link href={{
+                    pathname:"/my/update-business",
+                    query: { doc_id:listingDoc.id }
+                }} className="md:min-w-[180px] h-8 flex justify-center items-center bg-lime-700 text-white px-2 rounded-sm">Update Listing</Link>
+
+                <Link href="#" className="md:min-w-[180px] h-8 flex justify-center items-center bg-lime-700 text-white px-2 rounded-sm">View Listing</Link>
+            </div>
 
             <CiTrash className="absolute top-2 right-2 text-xl cursor-pointer"/>
         </div>
