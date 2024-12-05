@@ -45,7 +45,7 @@ export default function UpdateBusinessProcess () {
     },[]);
 
     const { handleSubmit,values,handleChange,touched,errors } = useFormik({
-        initialValues: { business_name:business.businessName, category:business?.category,sub_category:"",state:"",lga:"",business_description:business?.description,website:business?.url},
+        initialValues: { business_name:business?.businessName, category:business?.category,sub_category:"",state:"",lga:"",business_description:business?.description,website:business?.url},
         onSubmit: async () => {
             // Start loading indicator
             setStartProgress(true);
