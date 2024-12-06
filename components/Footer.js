@@ -12,7 +12,7 @@ export function Footer () {
                 <li className="text-xs text-gray-600"><Link href="#">Privacy Policy</Link></li>
             </ul>
 
-            <p className="text-xs text-gray-600">&copy; 2024 Iseowo. All Rights Reserved</p>
+            <p className="text-xs text-gray-600">&copy; {new Date().getFullYear()} NG Business Directory. All Rights Reserved</p>
         </footer>
     )
 }

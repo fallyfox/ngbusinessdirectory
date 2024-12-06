@@ -19,7 +19,7 @@ export function Nav () {
         <>
         <nav className="h-[60px] w-full flex justify-between items-center px-2 md:px-8 lg:px-16 shadow-md">
             <ul className="flex flex-col lg:flex-row lg:items-center gap-4">
-                <li className={`${bebasNeue} text-lg uppercase`}><Link href="/">Iseowo</Link></li>
+                <li className={`${bebasNeue} text-lg uppercase`}><Link href="/">NGBD</Link></li>
                 <li className="text-md text-gray-800 hidden lg:block"><Link href="/">Home</Link></li>
             </ul>
             <ul className="hidden lg:flex flex-col lg:flex-row lg:items-center gap-4">
