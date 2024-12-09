@@ -9,9 +9,9 @@ export default async function Signin() {
     const session = await auth();
 
     // <<<< USER AUTH CHECK >>>>
-    if (session?.user) {
-        redirect("/my")
-    }
+    // if (session?.user) {
+    //     redirect("/my")
+    // }
     // <<<< USER AUTH CHECK >>>>
     
     return (

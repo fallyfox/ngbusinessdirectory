@@ -27,7 +27,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             },
             from: process.env.EMAIL_FROM,
         }),
-
     ],
     adapter: FirestoreAdapter({
         credential: cert({
