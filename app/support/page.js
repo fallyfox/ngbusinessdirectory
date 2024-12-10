@@ -1,9 +1,13 @@
+import { auth } from "@/auth";
+import { Authorization } from "@/config/authorization.config";
+import Support from "./support";
 
+export default function Page () {
 
-export default function Support() {
-    return(
-        <>
-            <div>support</div>
-        </>
+    return (
+       <>
+       <Authorization/>
+        <Support/>
+       </>
     )
 }
